@@ -3,9 +3,9 @@
   async function sendFreeSats() {
     const zbdData = await fetch("https://api.zebedee.io/v0/process-static-charges/8755f68e-54a4-497c-a50b-ce07c8270b88?amount=1000");
     const actualInvoice = (await zbdData.json()).pr;
-  awaitwindow.webln.execute("sendPayment", {
-  paymentRequest: actualInvoice
-  });
+    await window.webln.execute("sendPayment", {
+      paymentRequest: actualInvoice
+    });
   }
   sendFreeSats();
 </script>
