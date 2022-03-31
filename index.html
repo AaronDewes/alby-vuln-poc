@@ -6,7 +6,7 @@
     <title>Alby security PoC</title>
     <script>
       async function getInvoice(amount) {
-        const zbdData = await fetch(`https://getalby.com/lnurlp/aaron/callback?amount=${amount}&comment=Alby%20PoC%20%F0%9F%90%9D`);
+        const zbdData = await fetch(`https://getalby.com/lnurlp/aaron/callback?amount=${amount}&comment=Alby%20Vulnerability%20PoC`);
         return (await zbdData.json()).pr;
       }
 
