@@ -11,7 +11,7 @@
 
       async function sendUsingWebLnExec() {
         await window.webln.execute("sendPayment", {
-          paymentRequest: await getInvoice(1000);
+          paymentRequest: await getInvoice(1000),
         });
       }
       
