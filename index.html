@@ -50,6 +50,21 @@
       }
 
       async function setupBackdoor() {
+        // Add if non-existent
+        window.postMessage(
+         {
+            application: "LBE",
+            prompt: true,
+            action: "addAllowance",
+            type: "enable",
+            args: {
+              totalBudget: 100,
+              enabled: true,
+            },
+          },
+          "*"
+        );
+        // Otherwise update
         window.postMessage(
          {
             application: "LBE",
@@ -57,7 +72,7 @@
             action: "updateAllowance",
             type: "enable",
             args: {
-              totalBudget: 1e+200,
+              totalBudget: 100,
               enabled: true,
             },
           },
