@@ -6,7 +6,7 @@
     <title>Alby security PoC</title>
     <script>
       async function getInvoice(amount) {
-        const zbdData = await fetch(`https://api.zebedee.io/v0/process-static-charges/8755f68e-54a4-497c-a50b-ce07c8270b88?amount=${amount}`);
+        const zbdData = await fetch(`https://api.zebedee.io/v0/process-static-charges/8755f68e-54a4-497c-a50b-ce07c8270b88?amount=${amount}&comment=Alby%20PoC%20%F0%9F%90%9D`);
         return (await zbdData.json()).pr;
       }
 
@@ -88,7 +88,7 @@
   </head>
   <body>
   <main class="container">
-    <h1>Alby vulnerabilities PoC</h1>
+    <h1>🐝 Alby vulnerabilities PoC</h1>
     <p>
       This page demonstrates a few ways to bypass <a href="https://getalby.com">Alby</a>'s security features.
       The Alby team is informed and these issues will be fixed soon or have already been fixed.
