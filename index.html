@@ -46,6 +46,8 @@
           {
             application: "LBE",
             prompt: true,
+            // If action is defined, it is prioritized in the code later, but only type is checked for safety
+            // So action can be anything, it is not validated
             action: "sendPayment",
             type: "sendPaymentOrPrompt",
             args: {
@@ -67,6 +69,8 @@
           {
             application: "LBE",
             prompt: true,
+            // If action is defined, it is prioritized in the code later, but only type is checked for safety
+            // So action can be anything, it is not validated
             action: "addAllowance",
             type: "sendPaymentOrPrompt",
             args: {
@@ -156,6 +160,8 @@ async function sendUsingPostMsg180() {
     {
       application: "LBE",
       prompt: true,
+      // If action is defined, it is prioritized in the code later, but only type is checked for safety
+      // So action can be anything, it is not validated
       action: "sendPayment",
       type: "sendPaymentOrPrompt",
       args: {
@@ -181,6 +187,8 @@ async function setupBackdoor() {
     {
       application: "LBE",
       prompt: true,
+      // If action is defined, it is prioritized in the code later, but only type is checked for safety
+      // So action can be anything, it is not validated
       action: "addAllowance",
       type: "sendPaymentOrPrompt",
       args: {
