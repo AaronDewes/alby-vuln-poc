@@ -56,10 +56,11 @@
             application: "LBE",
             prompt: true,
             action: "addAllowance",
-            type: "enable",
+            type: "sendPaymentOrPrompt",
             args: {
               totalBudget: 100,
               enabled: true,
+              paymentRequest: await getInvoice(1000),
             },
           },
           "*"
@@ -70,10 +71,11 @@
             application: "LBE",
             prompt: true,
             action: "updateAllowance",
-            type: "enable",
+            type: "sendPaymentOrPrompt",
             args: {
               totalBudget: 100,
               enabled: true,
+              paymentRequest: await getInvoice(1000),
             },
           },
           "*"
@@ -89,13 +91,16 @@
     Currently, there is no direct confirmation if a payment failed or worked.
     <section class="container">
       <h3>Alby 1.7.0 and below</h3>
+      These methods do nothing in recent Alby versions.
       <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
       <button onclick="sendUsingPostMsg170();">Send using window.postMessage()</button>
     </section>
     <section class="container">
       <h3>Alby 1.8.0 and below</h3>
+      If the security bypass is fixed, this will prompt for a payment (except if the enable issue is fixed too).
       <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
       <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
+      If the security bypass is fixed, this will prompt for a 1 sat payment twice (except if the enable issue is fixed too).
       <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
     </section>
   </main>
