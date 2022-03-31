@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="icon" href="/favicon.png">
     <title>Alby security PoC</title>
     <script>
       async function getInvoice(amount) {
@@ -89,22 +90,28 @@
   <main class="container">
     <h1>Alby vulnerabilities PoC</h1>
     This page demonstrates a few ways to bypass <a href="https://getalby.com">Alby</a>'s security features.
-    The development team is informed and these issues will be fixed soon.
-    Currently, there is no direct confirmation if a payment failed or worked.
+    The Alby team is informed and these issues will be fixed soon or have already been fixed.
+    Currently, there is no direct confirmation if a payment failed or worked on this page.
     <section class="container">
-      <h3>Alby 1.7.0 and below</h3>
-      These methods do nothing in recent Alby versions.
+      <hgroup>
+        <h2>Vulnerabilities in Alby 1.7.0 and below</h2>
+        <h3>These do nothing in recent versions</h3>
+      </hgroup>
       <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
       <button onclick="sendUsingPostMsg170();">Send using window.postMessage()</button>
     </section>
     <section class="container">
-      <h3>Alby 1.8.0 and below</h3>
-      If the security bypass is fixed, this will prompt for a payment (except if the enable issue is fixed too).
+      <hgroup>
+        <h2>Vulnerabilities in Alby 1.8.0 and below</h2>
+        <h3>These should create a simple payment dialog in recent versions or do nothing, depending on how much will be fixed.</h3>
+      </hgroup>
       <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
       <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
-      If the security bypass is fixed, this will prompt for a 1 sat payment twice (except if the enable issue is fixed too).
       <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
     </section>
   </main>
+  <footer>
+    Developed by <a href="https://twitter.com/AaronDewes">@AaronDewes</a>
+    </footer>
   </body>
 </html>
